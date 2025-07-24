@@ -67,4 +67,30 @@ done
 git remote add origin git@$host:$gh_user/$repo_name.git
 echo "Remote added: git@$host:$gh_user/$repo_name.git"
 
+echo "Use 'main' as your branch name?"
+select yn in "Yes" "No"; do
+  case $yn in
+    Yes)
+      branch_name="main"
+      break
+      ;;
+    No)
+      echo "Enter a custom branch name:"
+      read branch_name
+      break
+      ;;
+    *)
+      echo "Invalid choice. Please choose Yes or No."
+      ;;
+  esac
+done
+
+# Check if there are any commits before setting upstream
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  git branch --set-upstream-to=origin/$branch_name
+  echo "Upstream branch set to origin/$branch_name"
+else
+  echo "No commits yet. Use 'git push -u origin $branch_name' for your first push to set upstream."
+fi
+
 echo "🎉 Init complete!"

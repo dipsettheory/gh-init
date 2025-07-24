@@ -30,7 +30,7 @@ gh-init
 
 ---
 
-## 🗂️ Configure Your Identities
+## Configure Your Identities
 
 Create a file called `~/.gh-identities`:
 
@@ -99,7 +99,11 @@ It will:
 1. Ask which identity to use
 2. Set your Git name/email for the project
 3. Suggest using the current folder name as your repo name
-4. Add the correct Git remote using your SSH config
+4. Ask which branch name to use (defaults to "main")
+5. Add the correct Git remote using your SSH config
+6. Set upstream branch tracking (or provide guidance if no commits exist yet)
+
+**Note:** If you already have commits in your repo, the script will automatically set the upstream branch with `git branch --set-upstream-to=origin/<branch>`. If you're starting fresh with no commits, it will remind you to use `git push -u origin <branch>` for your first push, which accomplishes the same thing.
 
 Example:
 
@@ -117,6 +121,10 @@ Enter a custom repo name:
 > other-repo-name
 
 Remote added: git@github.com-alicelovesgithub:alicelovesgithub/other-repo-name.git
+Use 'main' as your branch name?
+1) Yes
+2) No
+No commits yet. Use 'git push -u origin main' for your first push to set upstream.
 🎉 Init complete!
 ```
 
